@@ -56,6 +56,11 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>drools-decisiontables</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-model-compiler</artifactId>
+      <version>7.33.0.Final</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
