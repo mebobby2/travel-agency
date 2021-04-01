@@ -93,7 +93,7 @@
             $.each(data, function (key, val) {
                 $("<tr><td>" + val.traveller.lastName + ", " + val.traveller.firstName + "</td>" +
                 "<td>" + val.trip.country + ", " + val.trip.city + "</td>" +
-                "<td>" + val.trip.begin.substring(0, 10) + " - " + val.trip.end.substring(0, 10) + "</td>" +
+                "<td>" + new Date(val.trip.begin).toISOString().substring(0, 10) + " - " + new Date(val.trip.end).toISOString().substring(0, 10) + "</td>" +
                 "<td>" + (val.trip.visaRequired ? 'Yes' : 'No') + "</td>" +
                 "<td>" + (val.hotel != null ? val.hotel.name : '') + "</td>" +
                 "<td>" + (val.flight != null ? val.flight.flightNumber : '')  + "</td>" +
@@ -107,8 +107,8 @@
                         "data-nationality='" + val.traveller.nationality + "' " +
                         "data-country='" + val.trip.country + "' " +
                         "data-city='" + val.trip.city + "' " +
-                        "data-begin='" + val.trip.begin.substring(0, 10) + "' " +
-                        "data-end='" + val.trip.end.substring(0, 10) + "' " +
+                        "data-begin='" + new Date(val.trip.begin).toISOString().substring(0, 10) + "' " +
+                        "data-end='" + new Date(val.trip.end).toISOString().substring(0, 10) + "' " +
                         "data-hotelname='" + (val.hotel != null ? val.hotel.name : "") + "' " +
                         "data-address='" + (val.hotel != null ? val.hotel.address.street : "") + "' " +
                         "data-bookingnumber='" + (val.hotel != null ? val.hotel.bookingNumber : "") + "' " +
