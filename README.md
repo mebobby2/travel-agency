@@ -11,6 +11,12 @@ You can run your application in dev mode that enables live coding using:
 ./mvnw quarkus:dev
 ```
 
+## Running unit tests
+
+```
+mvn verify
+```
+
 ## Packaging and running the application
 
 The application can be packaged using `./mvnw package`.
