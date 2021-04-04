@@ -12,10 +12,11 @@
     <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <quarkus-plugin.version>1.3.1.Final</quarkus-plugin.version>
+    <quarkus-plugin.version>1.13.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>1.3.1.Final</quarkus.platform.version>
+    <quarkus.platform.version>1.13.0.Final</quarkus.platform.version>
+    <kogito-quarkus.version>1.2.0.Final</kogito-quarkus.version>
     <surefire-plugin.version>2.22.1</surefire-plugin.version>
   </properties>
   <dependencyManagement>
@@ -24,6 +25,13 @@
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>${quarkus.platform.artifact-id}</artifactId>
         <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.kie.kogito</groupId>
+        <artifactId>kogito-quarkus-bom</artifactId>
+        <version>${kogito-quarkus.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -46,20 +54,15 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-kogito</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
-      <artifactId>drools-decisiontables</artifactId>
+      <artifactId>kogito-quarkus</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.drools</groupId>
-      <artifactId>drools-model-compiler</artifactId>
-      <version>7.33.0.Final</version>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>drools-decisiontables</artifactId>
     </dependency>
   </dependencies>
   <build>
