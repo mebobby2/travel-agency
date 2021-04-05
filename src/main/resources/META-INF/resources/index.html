@@ -60,6 +60,12 @@
     	    $( "#tripEnd" ).datepicker({
     	    	dateFormat: "yy-mm-dd"
     	    });
+    	    $( "#ptripBegin" ).datepicker({
+    	    	dateFormat: "yy-mm-dd"
+    	    });
+    	    $( "#ptripEnd" ).datepicker({
+    	    	dateFormat: "yy-mm-dd"
+    	    });
     	  } );
         load();
         initModal();
@@ -154,26 +160,26 @@
             productAction.unbind();
             var modal = $(this);
             modal.find('.modal-title').text("Plan new trip");
-            modal.find('#firstName').val("");
-            modal.find('#lastName').val("");
-            modal.find('#email').val("");
-            modal.find('#nationality').val("");
+            modal.find('#pfirstName').val("");
+            modal.find('#plastName').val("");
+            modal.find('#pemail').val("");
+            modal.find('#pnationality').val("");
 
             modal.find('#street').val("");
             modal.find('#city').val("");
             modal.find('#zipCode').val("");
             modal.find('#country').val("");
 
-            modal.find('#destinationCountry').val("");
-            modal.find('#destinationCity').val("");
-            modal.find('#tripBegin').val("");
-            modal.find('#tripEnd').val("");
+            modal.find('#pdestinationCountry').val("");
+            modal.find('#pdestinationCity').val("");
+            modal.find('#ptripBegin').val("");
+            modal.find('#ptripEnd').val("");
 
             productAction.click(function () {
 
             	var address = {street: $("#street").val(), city: $("#city").val(), zipCode: $("#zipCode").val(), country: $("#country").val()};
-            	var traveller = {firstName: $("#firstName").val(), lastName: $("#lastName").val(), email: $("#email").val(), nationality: $("#nationality").val(), address: address};
-            	var trip = {country: $("#destinationCountry").val(), city: $("#destinationCity").val(), begin: $("#tripBegin").val() + 'T00:00:00.000+02:00', end: $("#tripEnd").val() + 'T00:00:00.000+02:00'};
+            	var traveller = {firstName: $("#pfirstName").val(), lastName: $("#plastName").val(), email: $("#pemail").val(), nationality: $("#pnationality").val(), address: address};
+            	var trip = {country: $("#pdestinationCountry").val(), city: $("#pdestinationCity").val(), begin: $("#ptripBegin").val() + 'T00:00:00.000+02:00', end: $("#ptripEnd").val() + 'T00:00:00.000+02:00'};
             	var travelRequest = JSON.stringify({traveller: traveller, trip: trip});
 
                 create(travelRequest);
@@ -219,9 +225,9 @@
             $.getJSON("/travels/"+ id + "/tasks", function (data) {
             	$.each(data, function (key, val) {
 
-                	$("<tr><td>" + val + "</td>" +
+                	$("<tr><td>" + val.name + "</td>" +
                             "<td>" +
-                            "<button class='btn btn-primary btn-sm' onclick=\"completeTask(" + id + ", '" + val + "', " + key + ")\" data-dismiss=\"modal\" " +
+                            "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + "')\" data-dismiss=\"modal\" " +
                             "   <span>Complete</span>" +
                             "</button>" +
                             "</td>" +
@@ -245,21 +251,21 @@
 							<h3>Traveller</h3>
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<div class="form-group">
-									<label for="firstName">First Name</label> <input type="text"
-										class="form-control" id="firstName" name="firstName" required>
+									<label for="pfirstName">First Name</label> <input type="text"
+										class="form-control" id="pfirstName" name="pfirstName" required>
 								</div>
 								<div class="form-group">
-									<label for="lastName">Last Name</label> <input type="text"
-										class="form-control" id="lastName" name="lastName" required>
+									<label for="plastName">Last Name</label> <input type="text"
+										class="form-control" id="plastName" name="plastName" required>
 								</div>
 								<div class="form-group">
-									<label for="email">Email</label> <input type="text"
-										class="form-control" id="email" name="email" required>
+									<label for="pemail">Email</label> <input type="text"
+										class="form-control" id="pemail" name="pemail" required>
 								</div>
 								<div class="form-group">
-									<label for="nationality">Nationality</label> <input
-										type="text" class="form-control" id="nationality"
-										name="nationality" required>
+									<label for="pnationality">Nationality</label> <input
+										type="text" class="form-control" id="pnationality"
+										name="pnationality" required>
 								</div>
 
 							</div>
@@ -285,21 +291,21 @@
 							<h3>Trip</h3>
 							<div class="col-md-12 col-sm-12 col-xs-12">
 								<div class="form-group">
-									<label for="destinationCountry">Country</label> <input type="text"
-										class="form-control" id="destinationCountry" name="destinationCountry" required>
+									<label for="pdestinationCountry">Country</label> <input type="text"
+										class="form-control" id="pdestinationCountry" name="pdestinationCountry" required>
 								</div>
 								<div class="form-group">
-									<label for="destinationCity">City</label> <input type="text"
-										class="form-control" id="destinationCity" name="destinationCity" required>
+									<label for="pdestinationCity">City</label> <input type="text"
+										class="form-control" id="pdestinationCity" name="pdestinationCity" required>
 								</div>
 								<div class="form-group">
-									<label for="tripBegin">Begin at</label> <input type="text"
-										class="form-control" id="tripBegin" name="tripBegin" required>
+									<label for="ptripBegin">Begin at</label> <input type="text"
+										class="form-control" id="ptripBegin" name="ptripBegin" required>
 								</div>
 								<div class="form-group">
-									<label for="tripEnd">End at</label> <input
-										type="text" class="form-control" id="tripEnd"
-										name="tripEnd" required>
+									<label for="ptripEnd">End at</label> <input
+										type="text" class="form-control" id="ptripEnd"
+										name="ptripEnd" required>
 								</div>
 
 							</div>
