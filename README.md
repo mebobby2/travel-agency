@@ -11,6 +11,8 @@ You can run your application in dev mode that enables live coding using:
 ./mvnw quarkus:dev
 ```
 
+Access app at http://localhost:8080 and metrics at http://localhost:8080/metric
+
 ## Running unit tests
 
 ```

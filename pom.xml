@@ -64,6 +64,11 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>drools-decisiontables</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
+      <version>${kogito-quarkus.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
