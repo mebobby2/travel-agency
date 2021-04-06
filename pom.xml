@@ -69,6 +69,14 @@
       <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
       <version>${kogito-quarkus.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.kie.kogito</groupId>
+      <artifactId>infinispan-persistence-addon</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-infinispan-client</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

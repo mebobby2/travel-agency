@@ -6,9 +6,21 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 ## Running the application in dev mode
 
+### Prerequisites
+Infinispan
+```
+docker run -it -p 11222:11222 -e USER="username" -e PASS="password" quay.io/infinispan/server:12.0 &
+```
+
+### App
 You can run your application in dev mode that enables live coding using:
 ```
 ./mvnw quarkus:dev
+```
+
+or
+```
+mvn clean compile quarkus:dev
 ```
 
 Access app at http://localhost:8080 and metrics at http://localhost:8080/metric
