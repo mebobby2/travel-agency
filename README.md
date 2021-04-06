@@ -48,6 +48,13 @@ Access app at http://localhost:8080 and metrics at http://localhost:8080/metric
 mvn verify
 ```
 
+## Inspecting Kafka
+how to:
+```
+docker exec -it 8ff91b27aa98 /bin/bash
+cd /bin
+kafka-console-consumer --bootstrap-server localhost:9092 --topic kogito-processinstances-events --from-beginning
+```
 ## Packaging and running the application
 
 The application can be packaged using `./mvnw package`.
