@@ -86,6 +86,15 @@
         });
     }
 
+		function submitVisaApplication() {
+    	var application = {country: $("#visa_destinationCountry").val(), city: $("#visa_destinationCity").val(), firstName: $("#visa_firstName").val(), lastName: $("#visa_lastName").val(), duration: Number($("#visa_duration").val()), passportNumber: $("#visa_passportNumber").val(), nationality: $("#visa_nationality").val()};
+    	var visaApplicationRequest = JSON.stringify({visaApplication: application});
+
+			$.post("/travels/" + $("#visa_p_id").val() + "/VisaApplication/" + $("#visa_t_id").val(), visaApplicationRequest, function () {
+            load();
+        }, "json");
+    }
+
     function completeTask(id, taskName, taskId) {
 
         $.post("/travels/" + id + "/" + taskName + "/" + taskId, JSON.stringify({}), function () {
@@ -224,15 +233,58 @@
             $("#taskscontent").children().remove();
             $.getJSON("/travels/"+ id + "/tasks", function (data) {
             	$.each(data, function (key, val) {
-
-                	$("<tr><td>" + val.name + "</td>" +
+								if ("VisaApplication" == val.name) {
+									$("<tr><td>" + val.name + "</td>" +
+                            "<td>" +
+		            		"<button class='btn btn-primary btn-sm' " +
+		            		"data-dismiss=\"modal\" " +
+		                    "data-toggle='modal' " +
+		                    "data-target='#visaApplicationModal' " +
+		                    "data-id='" + id + "' " +
+		                    "data-taskid='" + val.id + "'>" +
+		                    "   <span>Apply</span>" +
+		                    "</button>" +
+		                    "</td>" +
+		                    "</tr>").appendTo("#taskscontent");
+								} else {
+									$("<tr><td>" + val.name + "</td>" +
                             "<td>" +
                             "<button class='btn btn-primary btn-sm' onclick=\"completeTask('" + id + "', '" + val.name + "', '" + val.id + "')\" data-dismiss=\"modal\" " +
                             "   <span>Complete</span>" +
                             "</button>" +
                             "</td>" +
                             "</tr>").appendTo("#taskscontent");
-                });
+									}
+							});
+
+        })
+
+				$("#visaApplicationModal").on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+
+            var id = button.data('id');
+            var taskid = button.data('taskid');
+            var modal = $(this);
+            modal.find('.modal-title').text("Visa application");
+
+            $.getJSON("/travels/"+ id + "/VisaApplication/" + taskid, function (data) {
+
+            		$("#visa_firstName").val(data.traveller.firstName);
+            		$("#visa_lastName").val(data.traveller.lastName);
+            		$("#visa_email").val(data.traveller.email);
+            		$("#visa_nationality").val(data.traveller.nationality);
+
+            		$("#visa_destinationCity").val(data.trip.city);
+            		$("#visa_destinationCountry").val(data.trip.country);
+            		$("#visa_tripBegin").val(data.trip.begin);
+            		$("#visa_tripEnd").val(data.trip.end);
+
+            		$("#visa_p_id").val(id);
+            		$("#visa_t_id").val(taskid);
+
+            		$("#visa_passportNumber").val('');
+            		$("#visa_duration").val('');
+             });
 
         })
     })
@@ -459,6 +511,94 @@
 
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="visaApplicationModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title" id="detailsModalTitle">Visa application</h4>
+            </div>
+            <div class="modal-body">
+            	<div class="container-fluid">
+						<div class="row">
+							<input type="hidden" id="visa_p_id"/>
+							<input type="hidden" id="visa_t_id"/>
+							<div class="col-md-12">
+				                <h1>Visa application</h1>
+				            </div>
+				            <div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<h3>Traveller</h3>
+								</div>
+								<div class="form-group">
+									<label for="visa_firstName">First Name</label> <input type="text"
+										class="form-control" id="visa_firstName" name="visa_firstName" readonly>
+								</div>
+								<div class="form-group">
+									<label for="visa_lastName">Last Name</label> <input type="text"
+										class="form-control" id="visa_lastName" name="visa_lastName" readonly>
+								</div>
+								<div class="form-group">
+									<label for="visa_email">Email</label> <input type="text"
+										class="form-control" id="visa_email" name="visa_email" readonly>
+								</div>
+								<div class="form-group">
+									<label for="visa_nationality">Nationality</label> <input
+										type="text" class="form-control" id="visa_nationality"
+										name="visa_nationality" readonly>
+								</div>
+							</div>
+
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<h3>Trip</h3>
+								</div>
+								<div class="form-group">
+									<label for="visa_destinationCountry">Country</label> <input type="text"
+										class="form-control" id="visa_destinationCountry" name="visa_destinationCountry" readonly>
+								</div>
+								<div class="form-group">
+									<label for="visa_destinationCity">City</label> <input type="text"
+										class="form-control" id="visa_destinationCity" name="visa_destinationCity" readonly>
+								</div>
+								<div class="form-group">
+									<label for="visa_tripBegin">Begin at</label> <input type="text"
+										class="form-control" id="visa_tripBegin" name="visa_tripBegin" readonly>
+								</div>
+								<div class="form-group">
+									<label for="visa_tripEnd">End at</label> <input
+										type="text" class="form-control" id="visa_tripEnd"
+										name="visa_tripEnd" readonly>
+								</div>
+							</div>
+														</div>
+							<div class="row">
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<div class="form-group">
+									<h3>Visa details</h3>
+								</div>
+								<div class="form-group">
+									<label for="visa_passportNumber">Passport number</label> <input type="text"
+										class="form-control" id="visa_passportNumber" name="visa_passportNumber">
+								</div>
+								<div class="form-group">
+									<label for="visa_duration">Duration</label> <input type="text"
+										class="form-control" id="visa_duration" name="visa_duration">
+								</div>
+							</div>
+							</div>
+							<div class="row">
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="submitVisaApplication()">Submit application</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 							</div>
 						</div>
 					</div>
