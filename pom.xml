@@ -68,11 +68,13 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>drools-decisiontables</artifactId>
     </dependency>
+    <!-- Process monitoring -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>monitoring-prometheus-quarkus-addon</artifactId>
       <version>${kogito-quarkus.version}</version>
     </dependency>
+    <!-- Process persistence - Quarkus Infinispan client & Kogito add-on-->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>infinispan-persistence-addon</artifactId>
@@ -81,6 +83,7 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-infinispan-client</artifactId>
     </dependency>
+    <!-- Reactive Messaging - Quarkus Kafka extensions & Kogito add-on  -->
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>kogito-events-reactive-messaging-addon</artifactId>
