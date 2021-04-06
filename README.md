@@ -7,10 +7,15 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 ## Running the application in dev mode
 
 ### Prerequisites
-Infinispan
+Infinispan & Kafka
 ```
-docker run -it -p 11222:11222 -e USER="username" -e PASS="password" quay.io/infinispan/server:12.0 &
+docker-compose up -d
 ```
+
+Kafka Topics
+* visaapplications - used to send visa application that are consumed and processed by Kogito Visas service
+* kogito-processinstances-events - used to emit events by kogito that can be consumed by data index service and other services
+* kogito-usertaskinstances-events -used to emit events by kogito that can be consumed by data index service
 
 ### App
 You can run your application in dev mode that enables live coding using:
