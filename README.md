@@ -10,6 +10,18 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 Infinispan & Kafka
 ```
 docker-compose up -d
+docker-compose down
+```
+
+Add to /etc/hosts
+```
+127.0.0.1       kafka-host
+```
+Now can access kafka (hosted in Docker for Mac) from the host machine via localhost:9092
+
+Add cluster to Kafka Manager
+```
+curl localhost:9000/clusters --data "name=default&zkHosts=zookeeper:2181&kafkaVersion=0.8.2.1&jmxEnabled=true&jmxUser=&jmxPass=&pollConsumers=true&activeOffsetCacheEnabled=true&tuning.brokerViewUpdatePeriodSeconds=30&tuning.clusterManagerThreadPoolSize=2&tuning.clusterManagerThreadPoolQueueSize=100&tuning.kafkaCommandThreadPoolSize=2&tuning.kafkaCommandThreadPoolQueueSize=100&tuning.logkafkaCommandThreadPoolSize=2&tuning.logkafkaCommandThreadPoolQueueSize=100&tuning.logkafkaUpdatePeriodSeconds=30&tuning.partitionOffsetCacheTimeoutSecs=5&tuning.brokerViewThreadPoolSize=4&tuning.brokerViewThreadPoolQueueSize=1000&tuning.offsetCacheThreadPoolSize=4&tuning.offsetCacheThreadPoolQueueSize=1000&tuning.kafkaAdminClientThreadPoolSize=4&tuning.kafkaAdminClientThreadPoolQueueSize=1000&tuning.kafkaManagedOffsetMetadataCheckMillis=30000&tuning.kafkaManagedOffsetGroupCacheSize=1000000&tuning.kafkaManagedOffsetGroupExpireDays=7&securityProtocol=PLAINTEXT&saslMechanism=DEFAULT" -X POST
 ```
 
 Kafka Topics
