@@ -23,7 +23,12 @@ Kafka Topics
 * kogito-processinstances-events - used to emit events by kogito that can be consumed by data index service and other services
 * kogito-usertaskinstances-events -used to emit events by kogito that can be consumed by data index service
 
+Data Index Store
+```
+wget https://repository.jboss.org/org/kie/kogito/data-index-service-infinispan/0.15.0/data-index-service-infinispan-0.15.0-runner.jar
 
+java -Dquarkus.infinispan-client.auth-username=username -Dquarkus.infinispan-client.auth-password=password -Dquarkus.infinispan-client.client-intelligence=BASIC -jar data-index-service-infinispan-0.15.0-runner.jar
+```
 
 ### App
 You can run your application in dev mode that enables live coding using:

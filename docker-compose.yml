@@ -48,3 +48,16 @@ services:
     environment:
       USER: username
       PASS: password
+
+  dataindex:
+    image: quay.io/kiegroup/kogito-data-index:latest
+    restart: on-failure
+    ports:
+      - 8180:8180
+    depends_on:
+      - infinispan
+    environment:
+      QUARKUS_INFINISPAN_CLIENT_AUTH_USERNAME: username
+      QUARKUS_INFINISPAN_CLIENT_AUTH_PASSWORD: password
+      QUARKUS_INFINISPAN_CLIENT_SERVER_LIST: infinispan:11222
+      KOGITO_DATA_INDEX_HTTP_PORT: 8180
