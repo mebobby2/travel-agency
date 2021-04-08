@@ -26,7 +26,7 @@ Kafka Topics
 
 
 ### App
-You can run your application in dev mode that enables live coding using:
+You can run your application in dev mode that enables live coding using. Run this command in each of the modules:
 ```
 ./mvnw quarkus:dev
 ```
